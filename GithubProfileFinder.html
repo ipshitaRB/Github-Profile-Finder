@@ -1,0 +1,33 @@
+<html>
+   <head>
+      <title>Github Profile Finder</title>
+      <link rel="stylesheet" href="css/bootstrap.css">
+      <link rel="shortcut icon" href="https://github.com/fluidicon.png" />
+   </head>
+   <body>
+      <div id='profile'></div>
+      <script>
+      function getProfile(){
+         var username = 'ipshitarb';
+         var xhttp = new XMLHttpRequest();
+         xhttp.onreadystatechange = function(){
+            if(xhttp.readyState == 4 && xhttp.status == 200){
+               var user = xhttp.responseText;
+               document.getElementById('profile').innerHTML = user;
+
+            }
+            
+         }
+
+         xhttp.open('GET','https://api.github.com/users/' + username, true);
+         xhttp.send();
+      }
+
+      getProfile();
+         
+      </script>
+      <script src="jquery-3.2.1.min.js"></script>
+      <script src="js/bootstrap.js"></script>
+      
+   </body>
+</html>
