@@ -7,15 +7,15 @@
    <body>
       <nav class="navbar navbar-light bg-light justify-content-between">
          <a class="navbar-brand">Github Profile Finder</a>
-         <form class="form-inline">
-            <input id="username" class="form-control mr-sm-2" type="search" placeholder="Search Github User" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+         <form class="form-inline" id='userForm'>
+            <input id="username" class="form-control mr-sm-2" type="search" placeholder="Github user name" aria-label="Search">
+            <button id='submit' class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
          </form>
       </nav>
       <div id='profile'></div>
       <script>
       function getProfile(e){
-         e.preventdefault();
+         e.preventDefault();
          var username = document.getElementById('username').value;
 
          if(!username || username == '' ){
@@ -24,8 +24,8 @@
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function(){
             if(xhttp.readyState == 4 && xhttp.status == 200){
-               var user = xhttp.responseText;
-               document.getElementById('profile').innerHTML = user.name;
+               var user = JSON.parse(xhttp.responseText);
+               document.getElementById('profile').innerHTML = `<h3 class="panel-title">${user.avatar_url}</h3>`;
 
             }
             
@@ -37,7 +37,7 @@
          
       }
 
-      getProfile();
+      document.getElementById('userForm').addEventListener('submit', getProfile, false);
          
       </script>
       <script src="jquery-3.2.1.min.js"></script>
